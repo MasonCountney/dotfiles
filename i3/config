@@ -4,11 +4,11 @@
 ## |                                               | ##
 ## +++++++++++++++++++++++++++++++++++++++++++++++++ ##
 
-#LVDS-1
-
+# Monitor = LVDS-1
 
 set $mod Mod4
-# kill focused window
+
+# kill
 bindsym $mod+Shift+q kill
 
 #####################################
@@ -35,6 +35,7 @@ client.focused_inactive  $border-color  $border-color  $text-color    $border-co
 client.urgent            $border-color  $urgent-color  $urgent-color  $border-color
 
 exec --no-startup-id nitrogen --restore
+exec_always compton &
 
 
 #####################################
@@ -166,6 +167,22 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 
+#####################################
+##            CONTROLS             ##
+#####################################
+
+# Audio
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Print
+bindsym Print exec scrot '%Y-%m-%d-%_scrot.jpg' -e 'mv $f ~/Pictures/'
+
 
 #####################################
 ##             OTHER               ##
@@ -205,7 +222,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-exec_always compton &
 
 #####################################
 ##               BAR               ##
