@@ -205,7 +205,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-
+exec_always compton &
 
 #####################################
 ##               BAR               ##
