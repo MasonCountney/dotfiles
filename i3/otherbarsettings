@@ -1,0 +1,17 @@
+bar {
+        position bottom
+        font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+        font pango:DejaVu Sans Mono 11
+        status_command i3status --config ~/.config/i3/i3status.conf
+
+        colors {
+    background #242424
+    statusline #bfbdbd
+    # separator #666666
+
+    focused_workspace #242424 #D5D5D5 #242424
+    active_workspace   #333333 #5f676a #ffffff
+    inactive_workspace #242424 #282828 #CCCACA
+    urgent_workspace   #2A1A1A #858774 #1b1b1b
+    binding_mode       #2f343a #900000 #ffffff
+}

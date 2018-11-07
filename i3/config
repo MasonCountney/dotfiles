@@ -1,0 +1,214 @@
+## +++++++++++++++++++++++++++++++++++++++++++++++++ ##
+## |                                               | ##
+## |           Config file by Mason                | ##
+## |                                               | ##
+## +++++++++++++++++++++++++++++++++++++++++++++++++ ##
+
+#LVDS-1
+
+
+set $mod Mod4
+# kill focused window
+bindsym $mod+Shift+q kill
+
+#####################################
+##             LOOKS               ##
+#####################################
+
+new_window pixel 3
+focus_follows_mouse  yes
+for_window [class="^.*"] border pixel 3
+font pango:Monospace 9
+
+# Window colors
+set $border-color     #68868C
+set $background-color #68868C
+set $inactive-color   #65737e
+set $text-color       #8fa1b3
+set $urgent-color     #bf616a
+set $active-color     #e1e0e2
+
+# class                  background     border         text           indicator
+client.focused           $border-color  $active-color  $text-color    $inactive-color
+client.unfocused         $border-color  $border-color  $text-color    $border-color
+client.focused_inactive  $border-color  $border-color  $text-color    $border-color
+client.urgent            $border-color  $urgent-color  $urgent-color  $border-color
+
+exec --no-startup-id nitrogen --restore
+
+
+#####################################
+##              GAPS               ##
+#####################################
+
+gaps inner 20
+gaps outer 0
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+
+#####################################
+##              MOVE               ##
+#####################################
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Focus windows
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Switch windows
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+
+
+#####################################
+##              APPS               ##
+#####################################
+
+bindsym $mod+Return exec xterm
+bindsym $mod+f exec firefox
+bindsym $mod+p exec thunar
+bindsym $mod+a exec atom
+bindsym $mod+d exec --no-startup-id rofi -show drun
+#dmenu_run
+
+
+
+#####################################
+##           WORKSPACES            ##
+#####################################
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "0"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+
+
+#####################################
+##             OTHER               ##
+#####################################
+
+# reload
+bindsym $mod+Shift+c reload
+# restart
+bindsym $mod+Shift+r restart
+# logout
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+
+#####################################
+##               BAR               ##
+#####################################
+
+exec_always --no-startup-id ~/.config/polybar/launch.sh
